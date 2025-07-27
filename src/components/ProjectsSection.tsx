@@ -1,45 +1,45 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ExternalLink, Github } from "lucide-react";
-import projectChurn from "@/assets/project-churn.jpg";
-import projectSentiment from "@/assets/project-sentiment.jpg";
-import projectCNN from "@/assets/project-cnn.jpg";
+import projectPortfolio from "@/assets/project-portfolio.jpg";
+import projectMedicare from "@/assets/project-medicare.jpg";
+import projectSafesafe from "@/assets/project-safesafe.jpg";
 
 const ProjectsSection = () => {
   const projects = [
     {
-      title: "Customer Churn Prediction Model",
-      overview: "Machine learning model to predict customer churn using advanced analytics",
-      problem: "Telecom companies face significant revenue loss due to customer churn",
-      role: "Built end-to-end ML pipeline with feature engineering and model optimization",
-      methodology: "Logistic Regression and Random Forest with hyperparameter tuning",
-      results: "Achieved 85% accuracy on telecom dataset, providing actionable retention insights",
-      techStack: ["Python", "Scikit-learn", "Pandas", "NumPy", "Matplotlib"],
-      image: projectChurn,
+      title: "Uday Singh | Data Science & Full-Stack Portfolio",
+      overview: "My personal portfolio website, showcasing expertise in Data Science, Machine Learning, and Full-Stack Development. Built with modern web technologies, it highlights my ability to create scalable, data-driven solutions and tackle complex challenges.",
+      problem: "Need for a comprehensive showcase of technical skills and professional experience",
+      role: "Full-stack development, UI/UX design, and technical implementation",
+      methodology: "Modern React architecture with TypeScript, responsive design principles, and performance optimization",
+      results: "Demonstrates modern web development practices, professional design principles, and comprehensive technical implementation",
+      techStack: ["React 18", "TypeScript", "Vite", "Tailwind CSS", "shadcn/ui", "React Query", "Lucide React"],
+      image: projectPortfolio,
       githubLink: "https://github.com/singhuday26",
       demoLink: null
     },
     {
-      title: "Real-Time Sentiment Analyzer",
-      overview: "Python application for real-time sentiment analysis of social media feeds",
-      problem: "Need for real-time market sentiment monitoring from social media data",
-      role: "Developed NLP pipeline with data preprocessing and sentiment classification",
-      methodology: "Natural Language Processing using TextBlob and NLTK libraries",
-      results: "Achieved 90% F1-score on live Twitter feeds for market sentiment analysis",
-      techStack: ["Python", "NLTK", "TextBlob", "Pandas", "Streamlit"],
-      image: projectSentiment,
+      title: "MediCare - Hospital Management System",
+      overview: "A comprehensive healthcare management system built with React, TypeScript, Tailwind CSS, and Supabase, designed to streamline hospital operations and enhance patient care.",
+      problem: "Need for efficient hospital operations and enhanced patient care management",
+      role: "Full-stack development with focus on healthcare workflows and data security",
+      methodology: "Component-based architecture with role-based access control and real-time data synchronization",
+      results: "Provides visual reports on hospital performance metrics, enhances patient data management, and ensures secure access control",
+      techStack: ["React 18", "TypeScript", "Tailwind CSS", "Supabase", "PostgreSQL", "React Query", "shadcn/ui"],
+      image: projectMedicare,
       githubLink: "https://github.com/singhuday26",
       demoLink: null
     },
     {
-      title: "Image Classification with CNN",
-      overview: "Deep learning model for robust image recognition using convolutional neural networks",
-      problem: "Accurate image classification for automated visual recognition systems",
-      role: "Designed and trained CNN architecture with data augmentation techniques",
-      methodology: "Convolutional Neural Network with TensorFlow/Keras and optimization",
-      results: "Achieved 93% accuracy with robust performance across diverse image categories",
-      techStack: ["Python", "TensorFlow", "Keras", "OpenCV", "NumPy"],
-      image: projectCNN,
+      title: "SafeSafe: Protect Your Financial Future",
+      overview: "An advanced financial security platform offering comprehensive fraud detection and protection for individuals and businesses with real-time monitoring and smart alerts.",
+      problem: "Rising financial fraud threats requiring proactive protection and real-time monitoring",
+      role: "Security architecture design, fraud detection algorithms, and user experience optimization",
+      methodology: "Real-time monitoring systems with machine learning-based fraud detection and multi-layered security protocols",
+      results: "Provides peace of mind, prevents fraudulent actions, offers security insights, and is trusted by thousands of users",
+      techStack: ["React", "TypeScript", "Tailwind CSS", "Node.js", "PostgreSQL", "Machine Learning", "Security APIs"],
+      image: projectSafesafe,
       githubLink: "https://github.com/singhuday26",
       demoLink: null
     }
@@ -50,7 +50,7 @@ const ProjectsSection = () => {
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
           <h2 className="section-header text-center mb-16">
-            My Data Science Projects
+            Featured Projects
           </h2>
           
           <div className="grid gap-8">
