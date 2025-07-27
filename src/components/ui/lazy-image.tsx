@@ -8,6 +8,27 @@ interface LazyImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   placeholder?: string;
 }
 
+// Security function to validate image sources
+const isValidImageSource = (src: string): boolean => {
+  try {
+    const url = new URL(src, window.location.origin);
+    // Allow same origin, specific trusted domains, and data URLs
+    const allowedOrigins = [
+      window.location.origin,
+      'https://images.unsplash.com',
+      'https://via.placeholder.com'
+    ];
+    
+    return (
+      allowedOrigins.includes(url.origin) ||
+      src.startsWith('data:image/') ||
+      src.startsWith('/') // Relative URLs
+    );
+  } catch {
+    return src.startsWith('/') || src.startsWith('data:image/');
+  }
+};
+
 export const LazyImage = React.memo(({ 
   src, 
   alt, 
@@ -17,7 +38,11 @@ export const LazyImage = React.memo(({
 }: LazyImageProps) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isInView, setIsInView] = useState(false);
+  const [hasError, setHasError] = useState(false);
   const imgRef = useRef<HTMLImageElement>(null);
+
+  // Security check for image source
+  const isValidSrc = isValidImageSource(src);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -41,22 +66,37 @@ export const LazyImage = React.memo(({
     setIsLoaded(true);
   };
 
+  const handleError = () => {
+    setHasError(true);
+    setIsLoaded(true);
+  };
+
   return (
     <div className={cn('relative overflow-hidden', className)}>
-      <img
-        ref={imgRef}
-        src={isInView ? src : placeholder}
-        alt={alt}
-        loading="lazy"
-        decoding="async"
-        onLoad={handleLoad}
-        className={cn(
-          'w-full h-full object-cover transition-opacity duration-300',
-          isLoaded ? 'opacity-100' : 'opacity-0'
-        )}
-        {...props}
-      />
-      {!isLoaded && isInView && (
+      {hasError || !isValidSrc ? (
+        <div className="flex items-center justify-center w-full h-full bg-muted min-h-[200px]">
+          <span className="text-muted-foreground text-sm">
+            {!isValidSrc ? 'Invalid image source' : 'Failed to load image'}
+          </span>
+        </div>
+      ) : (
+        <img
+          ref={imgRef}
+          src={isInView ? src : placeholder}
+          alt={alt}
+          loading="lazy"
+          decoding="async"
+          onLoad={handleLoad}
+          onError={handleError}
+          crossOrigin="anonymous"
+          className={cn(
+            'w-full h-full object-cover transition-opacity duration-300',
+            isLoaded ? 'opacity-100' : 'opacity-0'
+          )}
+          {...props}
+        />
+      )}
+      {!isLoaded && isInView && !hasError && isValidSrc && (
         <div className="absolute inset-0 bg-muted animate-pulse" />
       )}
     </div>
