@@ -1,7 +1,10 @@
-import { Card } from "@/components/ui/card";
+import React from "react";
+import { OptimizedCard } from "@/components/ui/optimized-card";
 import { Code, Database, BarChart3, Wrench } from "lucide-react";
+import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 
-const SkillsSection = () => {
+const SkillsSection = React.memo(() => {
+  const { elementRef, hasIntersected } = useIntersectionObserver();
   const skillCategories = [
     {
       icon: Code,
@@ -30,16 +33,18 @@ const SkillsSection = () => {
   ];
 
   return (
-    <section id="skills" className="py-20 bg-background">
+    <section id="skills" className="py-20 bg-background" ref={elementRef}>
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
           <h2 className="section-header text-center mb-16">
             My Technical Toolkit
           </h2>
           
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className={`grid md:grid-cols-2 gap-8 transform-gpu transition-all duration-700 ${
+            hasIntersected ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
+          }`}>
             {skillCategories.map((category, index) => (
-              <Card key={index} className="card-professional hover-glow">
+              <OptimizedCard key={index} className="card-professional hover-glow">
                 <div className="flex items-center space-x-4 mb-6">
                   <div className="bg-gradient-to-br from-primary to-primary-glow p-3 rounded-lg">
                     <category.icon className="w-6 h-6 text-primary-foreground" />
@@ -61,7 +66,7 @@ const SkillsSection = () => {
                     </span>
                   ))}
                 </div>
-              </Card>
+              </OptimizedCard>
             ))}
           </div>
           
@@ -72,7 +77,7 @@ const SkillsSection = () => {
               {["Python", "SQL", "Tableau", "TensorFlow", "Keras", "Scikit-learn"].map((skill, index) => (
                 <span
                   key={index}
-                  className="bg-gradient-to-r from-primary to-primary-glow text-primary-foreground px-6 py-3 rounded-full font-semibold text-lg shadow-lg hover:shadow-glow transition-all duration-300 hover:scale-105"
+                  className="bg-gradient-to-r from-primary to-primary-glow text-primary-foreground px-6 py-3 rounded-full font-semibold text-lg shadow-lg hover:shadow-glow transition-all duration-300 hover:scale-105 will-change-transform"
                 >
                   {skill}
                 </span>
@@ -83,6 +88,8 @@ const SkillsSection = () => {
       </div>
     </section>
   );
-};
+});
+
+SkillsSection.displayName = 'SkillsSection';
 
 export default SkillsSection;

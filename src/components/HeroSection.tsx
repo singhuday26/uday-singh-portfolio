@@ -1,24 +1,32 @@
+import React from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Linkedin } from "lucide-react";
+import { LazyImage } from "@/components/ui/lazy-image";
+import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import heroBackground from "@/assets/hero-background.jpg";
 
-const HeroSection = () => {
+const HeroSection = React.memo(() => {
+  const { elementRef, hasIntersected } = useIntersectionObserver();
   const scrollToProjects = () => {
     document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section ref={elementRef} className="relative min-h-screen flex items-center justify-center overflow-hidden transform-gpu">
       {/* Background Image with Overlay */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${heroBackground})` }}
-      >
+      <div className="absolute inset-0 transform-gpu">
+        <LazyImage 
+          src={heroBackground}
+          alt="Hero background"
+          className="w-full h-full object-cover"
+        />
         <div className="absolute inset-0 bg-gradient-to-b from-background/90 via-background/95 to-background"></div>
       </div>
       
       {/* Content */}
-      <div className="relative z-10 container mx-auto px-4 text-center">
+      <div className={`relative z-10 container mx-auto px-4 text-center transform-gpu transition-all duration-1000 ${
+        hasIntersected ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'
+      }`}>
         <div className="max-w-6xl mx-auto">
           {/* Professional Headshot Placeholder */}
           <div className="mb-8 flex justify-center">
@@ -69,13 +77,15 @@ const HeroSection = () => {
       </div>
 
       {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-        <div className="w-6 h-10 border-2 border-primary rounded-full flex justify-center">
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce will-change-transform">
+        <div className="w-6 h-10 border-2 border-primary rounded-full flex justify-center transform-gpu">
           <div className="w-1 h-3 bg-primary rounded-full mt-2 animate-pulse"></div>
         </div>
       </div>
     </section>
   );
-};
+});
+
+HeroSection.displayName = 'HeroSection';
 
 export default HeroSection;

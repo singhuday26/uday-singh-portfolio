@@ -1,11 +1,15 @@
-import { Card } from "@/components/ui/card";
+import React from "react";
+import { OptimizedCard } from "@/components/ui/optimized-card";
+import { LazyImage } from "@/components/ui/lazy-image";
 import { Button } from "@/components/ui/button";
 import { ExternalLink, Github } from "lucide-react";
+import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import projectPortfolio from "@/assets/project-portfolio.jpg";
 import projectMedicare from "@/assets/project-medicare.jpg";
 import projectSafesafe from "@/assets/project-safesafe.jpg";
 
-const ProjectsSection = () => {
+const ProjectsSection = React.memo(() => {
+  const { elementRef, hasIntersected } = useIntersectionObserver();
   const projects = [
     {
       title: "Uday Singh | Data Science & Full-Stack Portfolio",
@@ -46,24 +50,26 @@ const ProjectsSection = () => {
   ];
 
   return (
-    <section id="projects" className="py-20 bg-gradient-subtle">
+    <section id="projects" className="py-20 bg-gradient-subtle" ref={elementRef}>
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
           <h2 className="section-header text-center mb-16">
             Featured Projects
           </h2>
           
-          <div className="grid gap-8">
+          <div className={`grid gap-8 transform-gpu transition-all duration-700 ${
+            hasIntersected ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
+          }`}>
             {projects.map((project, index) => (
-              <Card key={index} className="card-project overflow-hidden">
+              <OptimizedCard key={index} className="card-project overflow-hidden">
                 <div className="grid lg:grid-cols-3 gap-8">
                   {/* Project Image */}
                   <div className="lg:col-span-1">
-                    <div className="relative h-64 lg:h-full min-h-[200px] rounded-lg overflow-hidden">
-                      <img
+                    <div className="relative h-64 lg:h-full min-h-[200px] rounded-lg overflow-hidden transform-gpu">
+                      <LazyImage
                         src={project.image}
                         alt={project.title}
-                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                        className="w-full h-full hover:scale-105 transition-transform duration-300 will-change-transform"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
                     </div>
@@ -139,13 +145,15 @@ const ProjectsSection = () => {
                     </div>
                   </div>
                 </div>
-              </Card>
+              </OptimizedCard>
             ))}
           </div>
         </div>
       </div>
     </section>
   );
-};
+});
+
+ProjectsSection.displayName = 'ProjectsSection';
 
 export default ProjectsSection;

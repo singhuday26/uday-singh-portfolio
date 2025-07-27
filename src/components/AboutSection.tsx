@@ -1,7 +1,10 @@
-import { Card } from "@/components/ui/card";
+import React from "react";
+import { OptimizedCard } from "@/components/ui/optimized-card";
 import { Trophy, Users, Code } from "lucide-react";
+import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 
-const AboutSection = () => {
+const AboutSection = React.memo(() => {
+  const { elementRef, hasIntersected } = useIntersectionObserver();
   const highlights = [
     {
       icon: Trophy,
@@ -21,19 +24,21 @@ const AboutSection = () => {
   ];
 
   return (
-    <section id="about" className="py-20 bg-gradient-subtle">
+    <section id="about" className="py-20 bg-gradient-subtle" ref={elementRef}>
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
           <h2 className="section-header text-center mb-16">
             About Me: Passionate About Data & Impact
           </h2>
           
-          <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
+          <div className={`grid lg:grid-cols-2 gap-12 items-center mb-16 transform-gpu transition-all duration-700 ${
+            hasIntersected ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
+          }`}>
             <div className="space-y-6">
               <p className="text-lg leading-relaxed text-foreground">
                 I am a results-driven Computer Science student specializing in Data Analytics at 
-                VIT-AP University, passionate about competitive problem-solving and building scalable, 
-                data-driven software solutions. My academic excellence (9.02/10.0 CGPA) is complemented 
+                 VIT-AP University, passionate about competitive problem-solving and building scalable, 
+                 data-driven software solutions. My academic excellence (9.07/10.0 CGPA) is complemented
                 by a proven ability to excel in high-pressure environments, as demonstrated in national-level hackathons.
               </p>
               
@@ -49,7 +54,7 @@ const AboutSection = () => {
             
             <div className="space-y-6">
               {highlights.map((highlight, index) => (
-                <Card key={index} className="card-professional hover-lift">
+                <OptimizedCard key={index} className="card-professional hover-lift">
                   <div className="flex items-start space-x-4">
                     <div className="bg-primary/10 p-3 rounded-lg">
                       <highlight.icon className="w-6 h-6 text-primary" />
@@ -59,7 +64,7 @@ const AboutSection = () => {
                       <p className="text-muted-foreground">{highlight.description}</p>
                     </div>
                   </div>
-                </Card>
+                </OptimizedCard>
               ))}
             </div>
           </div>
@@ -67,6 +72,8 @@ const AboutSection = () => {
       </div>
     </section>
   );
-};
+});
+
+AboutSection.displayName = 'AboutSection';
 
 export default AboutSection;
