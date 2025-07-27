@@ -28,13 +28,14 @@ const HeroSection = React.memo(() => {
         hasIntersected ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'
       }`}>
         <div className="max-w-6xl mx-auto">
-          {/* Professional Headshot Placeholder */}
+          {/* Professional Headshot */}
           <div className="mb-8 flex justify-center">
-            <div className="headshot-placeholder group">
-              <span className="text-primary-foreground">US</span>
-              <div className="absolute inset-0 bg-black/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                <span className="text-white text-sm font-medium">Upload Personal Photo</span>
-              </div>
+            <div className="relative w-32 h-32 rounded-full overflow-hidden ring-4 ring-primary/20 hover:ring-primary/40 transition-all duration-300 hover:scale-105 transform-gpu">
+              <LazyImage
+                src="/lovable-uploads/fad2ceb6-ecf8-49a9-8205-afa3d6191650.png"
+                alt="Uday Singh - Professional Headshot"
+                className="w-full h-full object-cover"
+              />
             </div>
           </div>
 
