@@ -8,7 +8,7 @@ const EducationSection = () => {
       degree: "B.Tech in Computer Science & Engineering (Data Analytics)",
       duration: "2023-2027",
       location: "Amaravati, AP",
-      cgpa: "9.02 / 10.0",
+      cgpa: "9.07 / 10.0",
       highlight: true
     },
     {
@@ -34,7 +34,7 @@ const EducationSection = () => {
       icon: Trophy,
       title: "Amazon HackOn (2025)",
       description: "Secured position in top 4% of teams (top 2,000 out of 50,000+), advancing to Round 3",
-      category: "Competitive Programming"
+      category: "Hackathon"
     },
     {
       icon: Award,
