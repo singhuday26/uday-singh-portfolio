@@ -64,7 +64,7 @@ const HeroSection = React.memo(() => {
             Uday Singh
           </h1>
           <h2 className="text-2xl md:text-3xl font-semibold text-muted-foreground mb-4 animate-fade-in">
-            Data-Driven Innovator | Aspiring Associate Data Scientist
+            Transforming Data Into Strategic Intelligence & Predictive Insights
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground mb-12 max-w-4xl mx-auto animate-fade-in">
             Crafting Scalable Solutions with Machine Learning & Analytics for Real-World Impact
