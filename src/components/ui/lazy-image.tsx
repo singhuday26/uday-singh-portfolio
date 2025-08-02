@@ -52,7 +52,7 @@ export const LazyImage = React.memo(({
           observer.disconnect();
         }
       },
-      { threshold: 0.1, rootMargin: '50px' }
+      { threshold: 0.1, rootMargin: '100px' }
     );
 
     if (imgRef.current) {
@@ -61,6 +61,14 @@ export const LazyImage = React.memo(({
 
     return () => observer.disconnect();
   }, []);
+
+  // Preload critical images
+  useEffect(() => {
+    if (isInView && isValidSrc) {
+      const img = new Image();
+      img.src = src;
+    }
+  }, [isInView, src, isValidSrc]);
 
   const handleLoad = () => {
     setIsLoaded(true);
