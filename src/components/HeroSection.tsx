@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Linkedin } from "lucide-react";
+import { ArrowRight, Linkedin, Brain, Database, BarChart3, Code2, Cpu, TrendingUp } from "lucide-react";
 import { LazyImage } from "@/components/ui/lazy-image";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import heroBackground from "@/assets/hero-background.jpg";
@@ -28,14 +28,34 @@ const HeroSection = React.memo(() => {
         hasIntersected ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'
       }`}>
         <div className="max-w-6xl mx-auto">
-          {/* Professional Headshot */}
-          <div className="mb-8 flex justify-center">
-            <div className="relative w-32 h-32 rounded-full overflow-hidden ring-4 ring-primary/20 hover:ring-primary/40 transition-all duration-300 hover:scale-105 transform-gpu">
-              <LazyImage
-                src="/lovable-uploads/fad2ceb6-ecf8-49a9-8205-afa3d6191650.png"
-                alt="Uday Singh - Professional Headshot"
-                className="w-full h-full object-cover"
-              />
+          {/* Animated Tech Icons Display */}
+          <div className="mb-12 flex justify-center">
+            <div className="relative">
+              {/* Central Brain Icon */}
+              <div className="relative z-10 w-24 h-24 bg-gradient-to-r from-primary to-primary-glow rounded-full flex items-center justify-center shadow-lg shadow-primary/25 animate-pulse">
+                <Brain className="w-12 h-12 text-white" />
+              </div>
+              
+              {/* Orbiting Icons */}
+              <div className="absolute inset-0 animate-spin-slow">
+                <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center shadow-lg animate-bounce">
+                  <Database className="w-6 h-6 text-white" />
+                </div>
+                <div className="absolute top-1/2 -right-8 transform -translate-y-1/2 w-12 h-12 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center shadow-lg animate-bounce delay-150">
+                  <BarChart3 className="w-6 h-6 text-white" />
+                </div>
+                <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center shadow-lg animate-bounce delay-300">
+                  <Code2 className="w-6 h-6 text-white" />
+                </div>
+                <div className="absolute top-1/2 -left-8 transform -translate-y-1/2 w-12 h-12 bg-gradient-to-r from-orange-500 to-red-500 rounded-full flex items-center justify-center shadow-lg animate-bounce delay-450">
+                  <Cpu className="w-6 h-6 text-white" />
+                </div>
+              </div>
+              
+              {/* Additional floating icons */}
+              <div className="absolute -top-4 -right-4 w-8 h-8 bg-gradient-to-r from-indigo-500 to-blue-500 rounded-full flex items-center justify-center shadow-lg animate-float">
+                <TrendingUp className="w-4 h-4 text-white" />
+              </div>
             </div>
           </div>
 
