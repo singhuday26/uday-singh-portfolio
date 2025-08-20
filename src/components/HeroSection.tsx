@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Linkedin, Brain, Database, BarChart3, Code2, Cpu, TrendingUp } from "lucide-react";
-import { LazyImage } from "@/components/ui/lazy-image";
+import { OptimizedLazyImage } from "@/components/ui/optimized-lazy-image";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import heroBackground from "@/assets/hero-background.jpg";
 
@@ -15,10 +15,11 @@ const HeroSection = React.memo(() => {
     <section ref={elementRef} className="relative min-h-screen flex items-center justify-center overflow-hidden transform-gpu">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 transform-gpu">
-        <LazyImage 
+        <OptimizedLazyImage 
           src={heroBackground}
-          alt="Hero background"
+          alt="Hero background showcasing data science visualization"
           className="w-full h-full object-cover"
+          priority={true}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-background/90 via-background/95 to-background"></div>
       </div>

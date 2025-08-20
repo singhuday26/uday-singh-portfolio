@@ -1,6 +1,6 @@
 import React from "react";
 import { OptimizedCard } from "@/components/ui/optimized-card";
-import { LazyImage } from "@/components/ui/lazy-image";
+import { OptimizedLazyImage } from "@/components/ui/optimized-lazy-image";
 import { Button } from "@/components/ui/button";
 import { ExternalLink, Github } from "lucide-react";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
@@ -66,9 +66,9 @@ const ProjectsSection = React.memo(() => {
                   {/* Project Image */}
                   <div className="lg:col-span-1">
                     <div className="relative h-64 lg:h-full min-h-[200px] rounded-lg overflow-hidden transform-gpu">
-                      <LazyImage
+                      <OptimizedLazyImage
                         src={project.image}
-                        alt={project.title}
+                        alt={`${project.title} - Screenshot showing project interface and features`}
                         className="w-full h-full hover:scale-105 transition-transform duration-300 will-change-transform"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>

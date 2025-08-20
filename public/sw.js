@@ -1,4 +1,4 @@
-const CACHE_NAME = 'portfolio-v1';
+const CACHE_NAME = 'portfolio-v2-optimized';
 const STATIC_RESOURCES = [
   '/',
   '/src/main.tsx',
@@ -9,8 +9,12 @@ const STATIC_RESOURCES = [
   '/src/assets/project-cnn.jpg',
   '/src/assets/project-medicare.jpg',
   '/src/assets/project-safesafe.jpg',
-  '/src/assets/project-sentiment.jpg'
+  '/src/assets/project-sentiment.jpg',
+  '/public/lovable-uploads/fad2ceb6-ecf8-49a9-8205-afa3d6191650.png'
 ];
+
+// Add stale-while-revalidate strategy for better performance
+const RUNTIME_CACHE = 'runtime-cache-v2';
 
 // Install event
 self.addEventListener('install', (event) => {
@@ -42,33 +46,70 @@ self.addEventListener('activate', (event) => {
   );
 });
 
-// Fetch event
+// Fetch event with stale-while-revalidate strategy
 self.addEventListener('fetch', (event) => {
   // Skip non-GET requests
   if (event.request.method !== 'GET') {
     return;
   }
 
-  event.respondWith(
-    caches.match(event.request)
-      .then((response) => {
-        // Return cached version or fetch from network
-        return response || fetch(event.request).then((fetchResponse) => {
-          // Cache successful responses
-          if (fetchResponse.status === 200) {
-            const responseClone = fetchResponse.clone();
-            caches.open(CACHE_NAME).then((cache) => {
-              cache.put(event.request, responseClone);
-            });
-          }
-          return fetchResponse;
-        });
-      })
-      .catch(() => {
-        // Return offline fallback for navigation requests
-        if (event.request.mode === 'navigate') {
-          return caches.match('/');
-        }
-      })
-  );
+  // Handle different types of requests
+  if (event.request.destination === 'image') {
+    // Image caching strategy: cache first, then network
+    event.respondWith(handleImageRequest(event.request));
+  } else if (event.request.mode === 'navigate') {
+    // Navigation requests: network first, fallback to cache
+    event.respondWith(handleNavigationRequest(event.request));
+  } else {
+    // Other resources: stale-while-revalidate
+    event.respondWith(handleResourceRequest(event.request));
+  }
 });
+
+// Image caching strategy
+async function handleImageRequest(request) {
+  const cache = await caches.open(CACHE_NAME);
+  const cached = await cache.match(request);
+  
+  if (cached) {
+    return cached;
+  }
+  
+  try {
+    const response = await fetch(request);
+    if (response.status === 200) {
+      cache.put(request, response.clone());
+    }
+    return response;
+  } catch (error) {
+    return cached; // Return cached version if available
+  }
+}
+
+// Navigation request handler
+async function handleNavigationRequest(request) {
+  try {
+    const response = await fetch(request);
+    return response;
+  } catch (error) {
+    const cache = await caches.open(CACHE_NAME);
+    return await cache.match('/') || new Response('Offline');
+  }
+}
+
+// Resource request handler with stale-while-revalidate
+async function handleResourceRequest(request) {
+  const cache = await caches.open(RUNTIME_CACHE);
+  const cached = await cache.match(request);
+  
+  // Start fetch in background
+  const fetchPromise = fetch(request).then(response => {
+    if (response.status === 200) {
+      cache.put(request, response.clone());
+    }
+    return response;
+  }).catch(() => cached);
+  
+  // Return cached version immediately if available
+  return cached || await fetchPromise;
+}
