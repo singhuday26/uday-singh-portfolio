@@ -1,6 +1,6 @@
 import React from "react";
 import { OptimizedCard } from "@/components/ui/optimized-card";
-import { Code, Database, BarChart3, Wrench } from "lucide-react";
+import { Code, Monitor, Layers, Wrench } from "lucide-react";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 
 const SkillsSection = React.memo(() => {
@@ -8,27 +8,27 @@ const SkillsSection = React.memo(() => {
   const skillCategories = [
     {
       icon: Code,
-      title: "Programming Languages",
-      skills: ["Python", "R", "SQL", "Java", "C/C++", "JavaScript"],
-      featured: ["Python", "SQL"]
+      title: "Frontend Technologies",
+      skills: ["React", "JavaScript ES6+", "TypeScript", "HTML5", "CSS3", "Tailwind CSS", "Next.js", "Vite"],
+      featured: ["React", "JavaScript", "TypeScript"]
     },
     {
-      icon: BarChart3,
-      title: "Data Science & ML",
-      skills: ["TensorFlow", "Keras", "PyTorch", "Scikit-learn", "Pandas", "NumPy", "Matplotlib", "Seaborn"],
-      featured: ["TensorFlow", "Keras", "Scikit-learn"]
+      icon: Monitor,
+      title: "UI Engineering & Performance",
+      skills: ["Component Architecture", "State Management", "Performance Optimization", "Responsive Design", "Web APIs", "Browser Optimization"],
+      featured: ["Component Architecture", "Performance Optimization", "Responsive Design"]
     },
     {
-      icon: Database,
-      title: "Web & Databases",
-      skills: ["HTML/CSS", "MySQL", "PostgreSQL", "MongoDB", "REST APIs"],
-      featured: ["MySQL", "PostgreSQL"]
+      icon: Layers,
+      title: "Development Stack & APIs",
+      skills: ["Node.js", "REST APIs", "GraphQL", "MongoDB", "PostgreSQL", "Git", "Docker", "CI/CD"],
+      featured: ["REST APIs", "Git", "Node.js"]
     },
     {
       icon: Wrench,
-      title: "Tools & Platforms",
-      skills: ["Git", "GitHub", "Docker", "Firebase", "Tableau", "Power BI", "Google Colab", "Spark (Learning)"],
-      featured: ["Tableau", "Git"]
+      title: "Tools & Collaboration",
+      skills: ["VS Code", "Chrome DevTools", "Figma", "Webpack", "ESLint", "Jest", "Agile/Scrum", "Cross-functional Teams"],
+      featured: ["Chrome DevTools", "Agile/Scrum", "Cross-functional Teams"]
     }
   ];
 
@@ -37,7 +37,7 @@ const SkillsSection = React.memo(() => {
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
           <h2 className="section-header text-center mb-16">
-            My Technical Toolkit
+            My UI Engineering Toolkit
           </h2>
           
           <div className={`grid md:grid-cols-2 gap-8 transform-gpu transition-all duration-700 ${
@@ -72,9 +72,9 @@ const SkillsSection = React.memo(() => {
           
           {/* Special Emphasis Section */}
           <div className="mt-12 text-center">
-            <h3 className="text-2xl font-semibold mb-6 text-primary">Core Strengths</h3>
+            <h3 className="text-2xl font-semibold mb-6 text-primary">Frontend Engineering Excellence</h3>
             <div className="flex flex-wrap justify-center gap-3">
-              {["Python", "SQL", "Tableau", "TensorFlow", "Keras", "Scikit-learn"].map((skill, index) => (
+              {["React", "JavaScript", "TypeScript", "Component Architecture", "Performance Optimization", "Responsive Design"].map((skill, index) => (
                 <span
                   key={index}
                   className="bg-gradient-to-r from-primary to-primary-glow text-primary-foreground px-6 py-3 rounded-full font-semibold text-lg shadow-lg hover:shadow-glow transition-all duration-300 hover:scale-105 will-change-transform"

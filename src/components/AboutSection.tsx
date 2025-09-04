@@ -9,17 +9,17 @@ const AboutSection = React.memo(() => {
     {
       icon: Trophy,
       title: "Top 4% in Amazon HackOn (2025)",
-      description: "Advanced to Round 3 among top 2,000 teams"
+      description: "Built scalable web application among top 2,000 teams"
     },
     {
       icon: Code,
-      title: "SIH 2024 Full-Stack Prototype",
-      description: "Built complete web app in 36 hours"
+      title: "SIH 2024 Full-Stack Web App",
+      description: "Developed consumer-facing platform in 36 hours"
     },
     {
       icon: Users,
       title: "Microsoft Learn Student Ambassador",
-      description: "Conducted workshops for 100+ students"
+      description: "Led technical workshops and cross-functional collaboration"
     }
   ];
 
@@ -28,7 +28,7 @@ const AboutSection = React.memo(() => {
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
           <h2 className="section-header text-center mb-16">
-            About Me: Passionate About Data & Impact
+            About Me: Passionate UI Engineer & Problem Solver
           </h2>
           
           <div className={`grid lg:grid-cols-2 gap-12 items-center mb-16 transform-gpu transition-all duration-700 ${
@@ -36,19 +36,18 @@ const AboutSection = React.memo(() => {
           }`}>
             <div className="space-y-6">
               <p className="text-lg leading-relaxed text-foreground">
-                I am a results-driven Computer Science student specializing in Data Analytics at 
-                 VIT-AP University, passionate about competitive problem-solving and building scalable, 
-                 data-driven software solutions. My academic excellence (9.07/10.0 CGPA) is complemented
-                by a proven ability to excel in high-pressure environments, as demonstrated in national-level hackathons.
+                I am a passionate UI Engineer and Computer Science student specializing in building 
+                scalable, user-centric web applications. With exceptional problem-solving skills and 
+                strong foundation in modern web technologies, I excel at creating efficient, reusable 
+                front-end systems that handle massive scale and deliver compelling user experiences.
               </p>
               
               <p className="text-lg leading-relaxed text-foreground">
-                With a strong foundation in machine learning and data analytics, I am eager to tackle 
-                complex challenges and innovate. I thrive in collaborative, fast-paced settings and am 
-                committed to leveraging data to generate impactful insights and contribute meaningfully 
-                to the tech community. My goal is to grow as a data-driven software engineer, making 
-                significant contributions to projects like those at MotorQ. I am also actively exploring 
-                concepts in Generative AI and Distributed Computing (Spark).
+                Proficient in React, JavaScript, HTML/CSS, and modern web development practices, I have 
+                successfully built consumer-facing applications serving thousands of users. My experience 
+                in cross-functional collaboration, performance optimization, and component-driven architecture 
+                makes me well-equipped to contribute to India's leading e-commerce platform and tackle 
+                complex engineering challenges at scale.
               </p>
             </div>
             

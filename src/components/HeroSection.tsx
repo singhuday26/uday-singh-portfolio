@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Linkedin, Brain, Database, BarChart3, Code2, Cpu, TrendingUp } from "lucide-react";
+import { ArrowRight, Linkedin, Monitor, Layers, Smartphone, Code2, Cpu, TrendingUp } from "lucide-react";
 import { OptimizedLazyImage } from "@/components/ui/optimized-lazy-image";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import heroBackground from "@/assets/hero-background.jpg";
@@ -32,18 +32,18 @@ const HeroSection = React.memo(() => {
           {/* Animated Tech Icons Display */}
           <div className="mb-12 flex justify-center">
             <div className="relative">
-              {/* Central Brain Icon */}
+              {/* Central Monitor Icon */}
               <div className="relative z-10 w-24 h-24 bg-gradient-to-r from-primary to-primary-glow rounded-full flex items-center justify-center shadow-lg shadow-primary/25 animate-pulse">
-                <Brain className="w-12 h-12 text-white" />
+                <Monitor className="w-12 h-12 text-white" />
               </div>
               
               {/* Orbiting Icons */}
               <div className="absolute inset-0 animate-spin-slow">
                 <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center shadow-lg animate-bounce">
-                  <Database className="w-6 h-6 text-white" />
+                  <Layers className="w-6 h-6 text-white" />
                 </div>
                 <div className="absolute top-1/2 -right-8 transform -translate-y-1/2 w-12 h-12 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center shadow-lg animate-bounce delay-150">
-                  <BarChart3 className="w-6 h-6 text-white" />
+                  <Smartphone className="w-6 h-6 text-white" />
                 </div>
                 <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center shadow-lg animate-bounce delay-300">
                   <Code2 className="w-6 h-6 text-white" />
@@ -65,10 +65,10 @@ const HeroSection = React.memo(() => {
             Uday Singh
           </h1>
           <h2 className="text-2xl md:text-3xl font-semibold text-muted-foreground mb-4 animate-fade-in">
-            Transforming Data Into Strategic Intelligence & Predictive Insights
+            UI Engineer | Building Scalable Consumer-Facing Web Applications
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground mb-12 max-w-4xl mx-auto animate-fade-in">
-            Crafting Scalable Solutions with Machine Learning & Analytics for Real-World Impact
+            Crafting Efficient, Reusable Front-End Systems with React & Modern Web Technologies
           </p>
 
           {/* CTA Buttons */}
@@ -77,7 +77,7 @@ const HeroSection = React.memo(() => {
               onClick={scrollToProjects}
               className="btn-hero group"
             >
-              Explore My Data Science Projects
+              Explore My UI Engineering Projects
               <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Button>
             <Button 
