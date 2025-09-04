@@ -4,46 +4,59 @@ import { OptimizedLazyImage } from "@/components/ui/optimized-lazy-image";
 import { Button } from "@/components/ui/button";
 import { ExternalLink, Github } from "lucide-react";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
-import projectPortfolio from "@/assets/project-portfolio.jpg";
+import projectChurn from "@/assets/project-churn.jpg";
+import projectCnn from "@/assets/project-cnn.jpg";
 import projectMedicare from "@/assets/project-medicare.jpg";
-import projectSafesafe from "@/assets/project-safesafe.jpg";
+import projectSentiment from "@/assets/project-sentiment.jpg";
 
 const ProjectsSection = React.memo(() => {
   const { elementRef, hasIntersected } = useIntersectionObserver();
   const projects = [
     {
-      title: "Uday Singh | Data Science & Full-Stack Portfolio",
-      overview: "My personal portfolio website, showcasing expertise in Data Science, Machine Learning, and Full-Stack Development. Built with modern web technologies, it highlights my ability to create scalable, data-driven solutions and tackle complex challenges.",
-      problem: "Need for a comprehensive showcase of technical skills and professional experience",
-      role: "Full-stack development, UI/UX design, and technical implementation",
-      methodology: "Modern React architecture with TypeScript, responsive design principles, and performance optimization",
-      results: "Demonstrates modern web development practices, professional design principles, and comprehensive technical implementation",
-      techStack: ["React 18", "TypeScript", "Vite", "Tailwind CSS", "shadcn/ui", "React Query", "Lucide React"],
-      image: projectPortfolio,
-      githubLink: "https://github.com/singhuday26",
-      demoLink: null
-    },
-    {
-      title: "MediCare - Hospital Management System",
-      overview: "A comprehensive healthcare management system built with React, TypeScript, Tailwind CSS, and Supabase, designed to streamline hospital operations and enhance patient care.",
-      problem: "Need for efficient hospital operations and enhanced patient care management",
-      role: "Full-stack development with focus on healthcare workflows and data security",
-      methodology: "Component-based architecture with role-based access control and real-time data synchronization",
-      results: "Provides visual reports on hospital performance metrics, enhances patient data management, and ensures secure access control",
-      techStack: ["React 18", "TypeScript", "Tailwind CSS", "Supabase", "PostgreSQL", "React Query", "shadcn/ui"],
+      title: "MediSafe – Comprehensive Hospital Management System",
+      overview: "Built a full-stack hospital platform using React.js, Node.js, MongoDB, managing patients, doctors, and staff. Designed reusable UI components, responsive layouts, and optimized state management.",
+      problem: "Need for efficient hospital operations and streamlined healthcare workflows",
+      role: "Full-stack development with focus on scalable application design and user experience",
+      methodology: "Implemented secure REST APIs, streamlined scheduling/billing workflows, and deployed with Docker + CI/CD",
+      results: "Showcased skills in scalable application design, user experience, and cross-functional collaboration",
+      techStack: ["React.js", "Node.js", "MongoDB", "Docker", "REST APIs", "CI/CD"],
       image: projectMedicare,
       githubLink: "https://github.com/singhuday26",
       demoLink: null
     },
     {
-      title: "SafeSafe: Protect Your Financial Future",
-      overview: "An advanced financial security platform offering comprehensive fraud detection and protection for individuals and businesses with real-time monitoring and smart alerts.",
-      problem: "Rising financial fraud threats requiring proactive protection and real-time monitoring",
-      role: "Security architecture design, fraud detection algorithms, and user experience optimization",
-      methodology: "Real-time monitoring systems with machine learning-based fraud detection and multi-layered security protocols",
-      results: "Provides peace of mind, prevents fraudulent actions, offers security insights, and is trusted by thousands of users",
-      techStack: ["React", "TypeScript", "Tailwind CSS", "Node.js", "PostgreSQL", "Machine Learning", "Security APIs"],
-      image: projectSafesafe,
+      title: "EduSphere360 – Customer-Facing EdTech Platform",
+      overview: "Developed a scalable MERN platform with secure APIs as Co-Founder, improving backend efficiency by 20%. Applied Agile sprints, CI/CD pipelines, and user-first design principles.",
+      problem: "Need for scalable educational technology platform with efficient backend systems",
+      role: "Co-Founder and Lead Developer focusing on backend optimization and user experience",
+      methodology: "Agile development methodology with CI/CD pipelines and user-first design principles",
+      results: "Improved backend efficiency by 20% and delivered scalable educational platform",
+      techStack: ["MongoDB", "Express.js", "React", "Node.js", "CI/CD", "Agile"],
+      image: projectCnn,
+      githubLink: "https://github.com/singhuday26",
+      demoLink: null
+    },
+    {
+      title: "Customer Churn Prediction – ML Project",
+      overview: "Processed 5k+ records, engineered features, and applied ML models (Logistic Regression, Random Forest) with 85% accuracy, generating actionable insights.",
+      problem: "Need to predict customer churn patterns for business decision making",
+      role: "Data Scientist and ML Engineer focusing on feature engineering and model optimization",
+      methodology: "Data preprocessing, feature engineering, and comparative analysis of ML algorithms",
+      results: "Achieved 85% accuracy in churn prediction and generated actionable business insights",
+      techStack: ["Python", "Scikit-learn", "Logistic Regression", "Random Forest", "Feature Engineering", "Data Analysis"],
+      image: projectChurn,
+      githubLink: "https://github.com/singhuday26",
+      demoLink: null
+    },
+    {
+      title: "Automatic Waste Segregation – IoT System",
+      overview: "Programmed Arduino + Python sensor modules, achieving 90% classification accuracy. Highlighted problem-solving and teamwork skills in IoT implementation.",
+      problem: "Need for automated waste classification and segregation system",
+      role: "IoT Developer and Systems Programmer focusing on sensor integration and classification",
+      methodology: "Arduino programming with Python integration for real-time waste classification",
+      results: "Achieved 90% classification accuracy and demonstrated effective problem-solving and teamwork",
+      techStack: ["Arduino", "Python", "IoT Sensors", "Machine Learning", "Embedded Systems"],
+      image: projectSentiment,
       githubLink: "https://github.com/singhuday26",
       demoLink: null
     }
