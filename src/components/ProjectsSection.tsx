@@ -4,10 +4,10 @@ import { OptimizedLazyImage } from "@/components/ui/optimized-lazy-image";
 import { Button } from "@/components/ui/button";
 import { ExternalLink, Github } from "lucide-react";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
-import projectChurn from "@/assets/project-churn.jpg";
-import projectCnn from "@/assets/project-cnn.jpg";
-import projectMedicare from "@/assets/project-medicare.jpg";
-import projectSentiment from "@/assets/project-sentiment.jpg";
+import projectChurn from "@/assets/project-churn.png";
+import projectCnn from "@/assets/project-edusphere.png";
+import projectMedicare from "@/assets/project-medicare.png";
+import projectSentiment from "@/assets/project-waste_management.png";
 
 const ProjectsSection = React.memo(() => {
   const { elementRef, hasIntersected } = useIntersectionObserver();
