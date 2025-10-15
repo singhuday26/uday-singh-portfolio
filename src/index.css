@@ -62,21 +62,38 @@
     --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
-}
+  }
+
+  /* Accessibility - Screen Reader Only */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
+  .focus\:not-sr-only:focus {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: inherit;
+    margin: inherit;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+  }
 
 /* Performance optimizations */
 .transform-gpu {
@@ -241,41 +258,9 @@
 }
 
 @layer components {
-  /* Professional Button Variants */
-  .btn-hero {
-    @apply bg-primary hover:bg-primary-glow text-primary-foreground px-8 py-4 rounded-lg font-semibold transition-all duration-300 hover:shadow-glow hover:scale-105;
-  }
-  
-  .btn-secondary {
-    @apply border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground px-8 py-4 rounded-lg font-semibold transition-all duration-300;
-  }
-  
+  /* Contact Button Variant */
   .btn-contact {
     @apply bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 hover:shadow-lg hover:scale-105;
-  }
-
-  /* Card Components */
-  .card-professional {
-    @apply bg-card border border-border rounded-xl p-6 transition-all duration-300 hover:shadow-elegant hover:-translate-y-1;
-  }
-
-  .card-project {
-    @apply bg-card border border-border rounded-xl p-6 transition-all duration-300 hover:shadow-elegant hover:-translate-y-2 cursor-pointer;
-  }
-
-  /* Professional Headshot Placeholder */
-  .headshot-placeholder {
-    @apply w-48 h-48 md:w-56 md:h-56 rounded-full bg-gradient-to-br from-primary to-primary-glow flex items-center justify-center text-6xl font-bold text-primary-foreground shadow-elegant transition-all duration-300 hover:shadow-glow hover:scale-105;
-  }
-
-  /* Skill Tags */
-  .skill-tag {
-    @apply bg-secondary text-secondary-foreground px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 hover:bg-accent hover:text-accent-foreground;
-  }
-
-  /* Section Headers */
-  .section-header {
-    @apply text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent mb-4;
   }
 
   /* Hover Animations */

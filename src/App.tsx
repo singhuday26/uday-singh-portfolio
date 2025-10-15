@@ -8,6 +8,7 @@ import { LazyRoute } from "@/components/LazyRoute";
 import { PerformanceOptimizer } from "@/components/PerformanceOptimizer";
 import { useServiceWorker } from "@/hooks/useServiceWorker";
 import { usePreloader } from "@/hooks/usePreloader";
+import ErrorBoundary from "@/components/ErrorBoundary";
 
 // Lazy load pages
 const Index = lazy(() => import("./pages/Index"));
@@ -30,20 +31,22 @@ const App = () => {
   usePreloader();
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <PerformanceOptimizer />
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<LazyRoute><Index /></LazyRoute>} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<LazyRoute><NotFound /></LazyRoute>} />
-          </Routes>
-        </BrowserRouter>
-      </TooltipProvider>
-    </QueryClientProvider>
+    <ErrorBoundary>
+      <QueryClientProvider client={queryClient}>
+        <TooltipProvider>
+          <PerformanceOptimizer />
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<LazyRoute><Index /></LazyRoute>} />
+              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+              <Route path="*" element={<LazyRoute><NotFound /></LazyRoute>} />
+            </Routes>
+          </BrowserRouter>
+        </TooltipProvider>
+      </QueryClientProvider>
+    </ErrorBoundary>
   );
 };
 

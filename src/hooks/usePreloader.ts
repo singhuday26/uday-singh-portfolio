@@ -2,10 +2,10 @@ import { useEffect } from 'react';
 
 const criticalAssets = [
   '/src/assets/hero-background.jpg',
-  '/src/assets/project-portfolio.jpg',
-  '/src/assets/project-medicare.jpg',
-  '/src/assets/project-safesafe.jpg',
-  '/public/lovable-uploads/fad2ceb6-ecf8-49a9-8205-afa3d6191650.png'
+  '/src/assets/project-medicare.png',
+  '/src/assets/project-edusphere.png',
+  '/src/assets/project-churn.png',
+  '/src/assets/project-waste_management.png'
 ];
 
 // Prioritize above-the-fold assets

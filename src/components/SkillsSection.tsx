@@ -4,7 +4,10 @@ import { Code, Monitor, Layers, Wrench } from "lucide-react";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 
 const SkillsSection = React.memo(() => {
-  const { elementRef, hasIntersected } = useIntersectionObserver();
+  const { elementRef, hasIntersected } = useIntersectionObserver({
+    threshold: 0.1,
+    rootMargin: '50px'
+  });
   const skillCategories = [
     {
       icon: Code,

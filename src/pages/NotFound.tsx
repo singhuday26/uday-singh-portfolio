@@ -1,5 +1,8 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Home, Search } from "lucide-react";
 
 const NotFound = () => {
   const location = useLocation();
@@ -12,14 +15,35 @@ const NotFound = () => {
   }, [location.pathname]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">404</h1>
-        <p className="text-xl text-gray-600 mb-4">Oops! Page not found</p>
-        <a href="/" className="text-blue-500 hover:text-blue-700 underline">
-          Return to Home
-        </a>
-      </div>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-subtle p-4">
+      <Card className="max-w-2xl w-full p-8 text-center space-y-6">
+        <div className="space-y-2">
+          <h1 className="text-8xl font-bold bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent">
+            404
+          </h1>
+          <h2 className="text-3xl font-bold text-foreground">
+            Page Not Found
+          </h2>
+          <p className="text-lg text-muted-foreground">
+            The page you're looking for doesn't exist or has been moved.
+          </p>
+        </div>
+
+        <div className="flex justify-center">
+          <div className="bg-primary/10 p-4 rounded-full">
+            <Search className="w-12 h-12 text-primary" />
+          </div>
+        </div>
+
+        <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+          <Button asChild className="btn-hero inline-flex items-center">
+            <Link to="/">
+              <Home className="mr-2 w-4 h-4" />
+              Back to Home
+            </Link>
+          </Button>
+        </div>
+      </Card>
     </div>
   );
 };

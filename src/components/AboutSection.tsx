@@ -4,7 +4,10 @@ import { Trophy, Users, Code } from "lucide-react";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 
 const AboutSection = React.memo(() => {
-  const { elementRef, hasIntersected } = useIntersectionObserver();
+  const { elementRef, hasIntersected } = useIntersectionObserver({
+    threshold: 0.1,
+    rootMargin: '50px'
+  });
   const highlights = [
     {
       icon: Trophy,

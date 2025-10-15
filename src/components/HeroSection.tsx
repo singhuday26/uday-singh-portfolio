@@ -6,9 +6,16 @@ import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import heroBackground from "@/assets/hero-background.jpg";
 
 const HeroSection = React.memo(() => {
-  const { elementRef, hasIntersected } = useIntersectionObserver();
+  const { elementRef, hasIntersected } = useIntersectionObserver({
+    threshold: 0.1,
+    triggerOnce: true
+  });
+  
   const scrollToProjects = () => {
-    document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
+    const element = document.getElementById('projects');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   };
 
   return (

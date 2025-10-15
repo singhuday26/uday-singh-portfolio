@@ -10,7 +10,10 @@ import projectMedicare from "@/assets/project-medicare.png";
 import projectSentiment from "@/assets/project-waste_management.png";
 
 const ProjectsSection = React.memo(() => {
-  const { elementRef, hasIntersected } = useIntersectionObserver();
+  const { elementRef, hasIntersected } = useIntersectionObserver({
+    threshold: 0.1,
+    rootMargin: '50px'
+  });
   const projects = [
     {
       title: "MediSafe – Scalable Hospital Management UI System",
