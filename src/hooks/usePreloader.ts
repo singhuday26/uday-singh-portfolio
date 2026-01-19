@@ -1,16 +1,16 @@
 import { useEffect } from 'react';
 
 const criticalAssets = [
-  '/src/assets/hero-background.jpg',
-  '/src/assets/project-medicare.png',
-  '/src/assets/project-edusphere.png',
-  '/src/assets/project-churn.png',
-  '/src/assets/project-waste_management.png'
+  '/src/assets/hero-background.webp',
+  '/src/assets/project-medicare.webp',
+  '/src/assets/project-edusphere.webp',
+  '/src/assets/project-churn.webp',
+  '/src/assets/project-waste_management.webp'
 ];
 
 // Prioritize above-the-fold assets
 const priorityAssets = [
-  '/src/assets/hero-background.jpg'
+  '/src/assets/hero-background.webp'
 ];
 
 export const usePreloader = () => {
@@ -40,7 +40,7 @@ export const usePreloader = () => {
 
     // Immediate preload for hero background
     preloadPriorityAssets();
-    
+
     // Delayed preload for other assets
     const timer = setTimeout(preloadSecondaryAssets, 200);
     return () => clearTimeout(timer);

@@ -31,29 +31,27 @@ const AboutSection = React.memo(() => {
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
           <h2 className="section-header text-center mb-16">
-            About Me: Passionate UI Engineer & Problem Solver
+            About Me: Product Engineer Driving Measurable Impact
           </h2>
-          
-          <div className={`grid lg:grid-cols-2 gap-12 items-center mb-16 transform-gpu transition-all duration-700 ${
-            hasIntersected ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
-          }`}>
+
+          <div className={`grid lg:grid-cols-2 gap-12 items-center mb-16 transform-gpu transition-all duration-700 ${hasIntersected ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
+            }`}>
             <div className="space-y-6">
               <p className="text-lg leading-relaxed text-foreground">
-                I am a passionate UI Engineer and Computer Science student specializing in building 
-                scalable, user-centric web applications. With exceptional problem-solving skills and 
-                strong foundation in modern web technologies, I excel at creating efficient, reusable 
-                front-end systems that handle massive scale and deliver compelling user experiences.
+                I am a <strong>Product Engineer</strong> specializing in <strong>Data Analytics</strong>, combining full-stack
+                engineering with data-driven decision making to build products that deliver measurable business outcomes.
+                I take end-to-end ownership of features—from conception through implementation to impact measurement—ensuring
+                every line of code drives real results.
               </p>
-              
+
               <p className="text-lg leading-relaxed text-foreground">
-                Proficient in React, JavaScript, HTML/CSS, and modern web development practices, I have 
-                successfully built consumer-facing applications serving thousands of users. My experience 
-                in cross-functional collaboration, performance optimization, and component-driven architecture 
-                makes me well-equipped to contribute to India's leading e-commerce platform and tackle 
-                complex engineering challenges at scale.
+                With expertise in React, TypeScript, backend integration, and analytics, I've built consumer-facing applications
+                serving thousands of users while achieving <strong>40% improvement in user engagement</strong> and <strong>20%
+                  performance gains</strong>. My unique blend of engineering skills and data analytics background enables me to
+                make informed product decisions, optimize for business metrics, and deliver features that move the needle.
               </p>
             </div>
-            
+
             <div className="space-y-6">
               {highlights.map((highlight, index) => (
                 <OptimizedCard key={index} className="card-professional hover-lift">

@@ -10,7 +10,7 @@ const HeroSection = React.memo(() => {
     threshold: 0.1,
     triggerOnce: true
   });
-  
+
   const scrollToProjects = () => {
     const element = document.getElementById('projects');
     if (element) {
@@ -22,7 +22,7 @@ const HeroSection = React.memo(() => {
     <section ref={elementRef} className="relative min-h-screen flex items-center justify-center overflow-hidden transform-gpu">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 transform-gpu">
-        <OptimizedLazyImage 
+        <OptimizedLazyImage
           src={heroBackground}
           alt="Hero background showcasing data science visualization"
           className="w-full h-full object-cover"
@@ -30,11 +30,10 @@ const HeroSection = React.memo(() => {
         />
         <div className="absolute inset-0 bg-gradient-to-b from-background/90 via-background/95 to-background"></div>
       </div>
-      
+
       {/* Content */}
-      <div className={`relative z-10 container mx-auto px-4 text-center transform-gpu transition-all duration-1000 ${
-        hasIntersected ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'
-      }`}>
+      <div className={`relative z-10 container mx-auto px-4 text-center transform-gpu transition-all duration-1000 ${hasIntersected ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'
+        }`}>
         <div className="max-w-6xl mx-auto">
           {/* Animated Tech Icons Display */}
           <div className="mb-12 flex justify-center">
@@ -43,7 +42,7 @@ const HeroSection = React.memo(() => {
               <div className="relative z-10 w-24 h-24 bg-gradient-to-r from-primary to-primary-glow rounded-full flex items-center justify-center shadow-lg shadow-primary/25 animate-pulse">
                 <Monitor className="w-12 h-12 text-white" />
               </div>
-              
+
               {/* Orbiting Icons */}
               <div className="absolute inset-0 animate-spin-slow">
                 <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center shadow-lg animate-bounce">
@@ -59,7 +58,7 @@ const HeroSection = React.memo(() => {
                   <Cpu className="w-6 h-6 text-white" />
                 </div>
               </div>
-              
+
               {/* Additional floating icons */}
               <div className="absolute -top-4 -right-4 w-8 h-8 bg-gradient-to-r from-indigo-500 to-blue-500 rounded-full flex items-center justify-center shadow-lg animate-float">
                 <TrendingUp className="w-4 h-4 text-white" />
@@ -72,28 +71,28 @@ const HeroSection = React.memo(() => {
             Uday Singh
           </h1>
           <h2 className="text-2xl md:text-3xl font-semibold text-muted-foreground mb-4 animate-fade-in">
-            UI Engineer | Building Scalable Consumer-Facing Web Applications
+            Product Engineer | Building Data-Driven Web Applications
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground mb-12 max-w-4xl mx-auto animate-fade-in">
-            Crafting Efficient, Reusable Front-End Systems with React & Modern Web Technologies
+            Driving Product Outcomes Through Full-Stack Engineering & Analytics
           </p>
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center animate-fade-in">
-            <Button 
+            <Button
               onClick={scrollToProjects}
               className="btn-hero group"
             >
-              Explore My UI Engineering Projects
+              Explore My Product Engineering Projects
               <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Button>
-            <Button 
+            <Button
               asChild
               className="btn-secondary"
             >
-              <a 
-                href="https://linkedin.com/in/udaysingh2626" 
-                target="_blank" 
+              <a
+                href="https://linkedin.com/in/udaysingh2626"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center"
               >

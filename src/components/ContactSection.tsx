@@ -6,6 +6,7 @@ import { Mail, Phone, Github, Linkedin, Code2 } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { sanitizeInput, validateEmail, validateName, validateMessage, rateLimiter } from "@/lib/security";
+import { supabase } from "@/lib/supabase";
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({
@@ -14,7 +15,7 @@ const ContactSection = () => {
     message: '',
     honeypot: '' // Hidden field for spam protection
   });
-  
+
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
@@ -55,7 +56,7 @@ const ContactSection = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     // Rate limiting check
     if (!rateLimiter.canSubmit()) {
       const timeRemaining = Math.ceil(rateLimiter.getTimeUntilNextSubmission() / 1000);
@@ -70,22 +71,32 @@ const ContactSection = () => {
     if (!validateForm()) return;
 
     setIsSubmitting(true);
-    
+
     try {
-      // Simulate API call delay
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
+      const { error } = await supabase
+        .from('contact_messages')
+        .insert([
+          {
+            name: formData.name,
+            email: formData.email,
+            message: formData.message
+          }
+        ]);
+
+      if (error) throw error;
+
       toast({
         title: "Message Sent!",
         description: "Thank you for reaching out. I'll get back to you soon.",
       });
-      
+
       setFormData({ name: '', email: '', message: '', honeypot: '' });
       setErrors({});
     } catch (error) {
+      console.error('Submission error:', error);
       toast({
         title: "Submission Failed",
-        description: "Please try again later.",
+        description: "There was an error sending your message. Please try again later.",
         variant: "destructive"
       });
     } finally {
@@ -96,12 +107,12 @@ const ContactSection = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     const sanitizedValue = name !== 'honeypot' ? sanitizeInput(value) : value;
-    
+
     setFormData(prev => ({
       ...prev,
       [name]: sanitizedValue
     }));
-    
+
     // Clear error when user starts typing
     if (errors[name]) {
       setErrors(prev => ({ ...prev, [name]: '' }));
@@ -148,24 +159,24 @@ const ContactSection = () => {
           <h2 className="section-header text-center mb-16">
             Let's Connect
           </h2>
-          
+
           <div className="grid lg:grid-cols-2 gap-12">
             {/* Contact Information */}
             <div className="space-y-8">
               <div>
                 <h3 className="text-2xl font-semibold mb-6 text-primary">Get In Touch</h3>
                 <p className="text-lg text-muted-foreground mb-8">
-                  I'm always open to discussing new opportunities, collaborations, 
-                  or just having a conversation about data science and technology. 
+                  I'm always open to discussing new opportunities, collaborations,
+                  or just having a conversation about data science and technology.
                   Feel free to reach out!
                 </p>
               </div>
-              
+
               {/* Contact Cards - Center aligned grid */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {contactInfo.map((contact, index) => (
                   <Card key={index} className="card-professional hover-lift text-center">
-                    <a 
+                    <a
                       href={contact.link}
                       target={contact.link.startsWith('http') ? '_blank' : undefined}
                       rel={contact.link.startsWith('http') ? 'noopener noreferrer' : undefined}
@@ -177,7 +188,7 @@ const ContactSection = () => {
                         </div>
                         <div>
                           <h4 className="font-medium text-foreground">{contact.label}</h4>
-                          <p className="text-sm text-muted-foreground break-all">{contact.value}</p>
+                          <p className="text-sm text-muted-foreground break-all px-1">{contact.value}</p>
                         </div>
                       </div>
                     </a>
@@ -200,7 +211,7 @@ const ContactSection = () => {
                   tabIndex={-1}
                   autoComplete="off"
                 />
-                
+
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium mb-2">
                     Name *
@@ -220,7 +231,7 @@ const ContactSection = () => {
                     <p className="text-sm text-destructive mt-1">{errors.name}</p>
                   )}
                 </div>
-                
+
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium mb-2">
                     Email *
@@ -241,7 +252,7 @@ const ContactSection = () => {
                     <p className="text-sm text-destructive mt-1">{errors.email}</p>
                   )}
                 </div>
-                
+
                 <div>
                   <label htmlFor="message" className="block text-sm font-medium mb-2">
                     Message *
@@ -264,10 +275,10 @@ const ContactSection = () => {
                     {formData.message.length}/1000 characters
                   </p>
                 </div>
-                
-                <Button 
-                  type="submit" 
-                  className="btn-contact w-full" 
+
+                <Button
+                  type="submit"
+                  className="btn-contact w-full"
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? (
