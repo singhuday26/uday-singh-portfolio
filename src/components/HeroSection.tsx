@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Linkedin, Monitor, Layers, Smartphone, Code2, Cpu, TrendingUp } from "lucide-react";
+import { ArrowRight, Linkedin, Monitor, Layers, Smartphone, Code2, Cpu, TrendingUp, Download } from "lucide-react";
 import { OptimizedLazyImage } from "@/components/ui/optimized-lazy-image";
 import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 import heroBackground from "@/assets/hero-background.jpg";
@@ -98,6 +98,20 @@ const HeroSection = React.memo(() => {
               >
                 <Linkedin className="mr-2 w-5 h-5" />
                 Connect on LinkedIn
+              </a>
+            </Button>
+            <Button
+              asChild
+              className="btn-secondary"
+            >
+              <a
+                href="/resume-uday-singh.pdf"
+                download="Uday_Singh_Resume.pdf"
+                className="inline-flex items-center"
+                aria-label="Download resume PDF"
+              >
+                <Download className="mr-2 w-5 h-5" />
+                Download Resume
               </a>
             </Button>
           </div>

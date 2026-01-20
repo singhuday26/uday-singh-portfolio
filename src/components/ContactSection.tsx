@@ -2,7 +2,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Mail, Phone, Github, Linkedin, Code2 } from "lucide-react";
+import { Mail, Phone, Github, Linkedin, Code2, Download } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { sanitizeInput, validateEmail, validateName, validateMessage, rateLimiter } from "@/lib/security";
@@ -149,6 +149,13 @@ const ContactSection = () => {
       label: "LeetCode",
       value: "udaysingh2408",
       link: "https://leetcode.com/udaysingh2408"
+    },
+    {
+      icon: Download,
+      label: "Resume",
+      value: "Download PDF",
+      link: "/resume-uday-singh.pdf",
+      download: "Uday_Singh_Resume.pdf"
     }
   ];
 
@@ -180,6 +187,7 @@ const ContactSection = () => {
                       href={contact.link}
                       target={contact.link.startsWith('http') ? '_blank' : undefined}
                       rel={contact.link.startsWith('http') ? 'noopener noreferrer' : undefined}
+                      download={'download' in contact ? (contact as any).download : undefined}
                       className="block p-2"
                     >
                       <div className="flex flex-col items-center space-y-3">

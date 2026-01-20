@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Download } from "lucide-react";
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -87,6 +87,21 @@ const Navigation = () => {
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
               </button>
             ))}
+            <Button
+              asChild
+              size="sm"
+              className="btn-hero"
+            >
+              <a
+                href="/resume-uday-singh.pdf"
+                download="Uday_Singh_Resume.pdf"
+                className="inline-flex items-center"
+                aria-label="Download resume PDF"
+              >
+                <Download className="mr-2 w-4 h-4" />
+                Resume
+              </a>
+            </Button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -122,6 +137,16 @@ const Navigation = () => {
                   {link.label}
                 </button>
               ))}
+              <a
+                href="/resume-uday-singh.pdf"
+                download="Uday_Singh_Resume.pdf"
+                className="flex items-center w-full px-4 py-2 text-foreground hover:text-primary hover:bg-primary/10 transition-colors duration-200 rounded-lg"
+                onClick={() => setIsMobileMenuOpen(false)}
+                aria-label="Download resume PDF"
+              >
+                <Download className="mr-2 w-4 h-4" />
+                Download Resume
+              </a>
             </div>
           </div>
         )}
