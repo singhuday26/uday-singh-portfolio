@@ -31,7 +31,14 @@ export const useProjects = () => {
         );
         return fallbackProjects;
       }
-      return (data as ProjectDB[]) ?? fallbackProjects;
+      // Deduplicate by title in case seed was run multiple times
+      const seen = new Set<string>();
+      const unique = (data as ProjectDB[]).filter((p) => {
+        if (seen.has(p.title)) return false;
+        seen.add(p.title);
+        return true;
+      });
+      return unique.length > 0 ? unique : fallbackProjects;
     },
   });
 };
@@ -54,7 +61,13 @@ export const useEducation = () => {
         );
         return fallbackEducation;
       }
-      return (data as EducationDB[]) ?? fallbackEducation;
+      const seen = new Set<string>();
+      const unique = (data as EducationDB[]).filter((e) => {
+        if (seen.has(e.institution + e.degree)) return false;
+        seen.add(e.institution + e.degree);
+        return true;
+      });
+      return unique.length > 0 ? unique : fallbackEducation;
     },
   });
 };
@@ -77,7 +90,13 @@ export const useAchievements = () => {
         );
         return fallbackAchievements;
       }
-      return (data as AchievementDB[]) ?? fallbackAchievements;
+      const seen = new Set<string>();
+      const unique = (data as AchievementDB[]).filter((a) => {
+        if (seen.has(a.title)) return false;
+        seen.add(a.title);
+        return true;
+      });
+      return unique.length > 0 ? unique : fallbackAchievements;
     },
   });
 };
