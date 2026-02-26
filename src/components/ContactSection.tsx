@@ -5,15 +5,21 @@ import { Textarea } from "@/components/ui/textarea";
 import { Mail, Phone, Github, Linkedin, Code2, Download } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
-import { sanitizeInput, validateEmail, validateName, validateMessage, rateLimiter } from "@/lib/security";
+import {
+  sanitizeInput,
+  validateEmail,
+  validateName,
+  validateMessage,
+  rateLimiter,
+} from "@/lib/security";
 import { supabase } from "@/lib/supabase";
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: '',
-    honeypot: '' // Hidden field for spam protection
+    name: "",
+    email: "",
+    message: "",
+    honeypot: "", // Hidden field for spam protection
   });
 
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -28,7 +34,7 @@ const ContactSection = () => {
       toast({
         title: "Submission Failed",
         description: "Please try again.",
-        variant: "destructive"
+        variant: "destructive",
       });
       return false;
     }
@@ -39,7 +45,8 @@ const ContactSection = () => {
     const sanitizedMessage = sanitizeInput(formData.message);
 
     if (!validateName(sanitizedName)) {
-      newErrors.name = "Please enter a valid name (2-50 characters, letters only)";
+      newErrors.name =
+        "Please enter a valid name (2-50 characters, letters only)";
     }
 
     if (!validateEmail(sanitizedEmail)) {
@@ -59,11 +66,13 @@ const ContactSection = () => {
 
     // Rate limiting check
     if (!rateLimiter.canSubmit()) {
-      const timeRemaining = Math.ceil(rateLimiter.getTimeUntilNextSubmission() / 1000);
+      const timeRemaining = Math.ceil(
+        rateLimiter.getTimeUntilNextSubmission() / 1000,
+      );
       toast({
         title: "Too Many Requests",
         description: `Please wait ${timeRemaining} seconds before submitting again.`,
-        variant: "destructive"
+        variant: "destructive",
       });
       return;
     }
@@ -73,15 +82,17 @@ const ContactSection = () => {
     setIsSubmitting(true);
 
     try {
-      const { error } = await supabase
-        .from('contact_messages')
-        .insert([
-          {
-            name: formData.name,
-            email: formData.email,
-            message: formData.message
-          }
-        ]);
+      if (!supabase) {
+        throw new Error("Contact form is not available at this time.");
+      }
+
+      const { error } = await supabase.from("contact_messages").insert([
+        {
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+        },
+      ]);
 
       if (error) throw error;
 
@@ -90,32 +101,35 @@ const ContactSection = () => {
         description: "Thank you for reaching out. I'll get back to you soon.",
       });
 
-      setFormData({ name: '', email: '', message: '', honeypot: '' });
+      setFormData({ name: "", email: "", message: "", honeypot: "" });
       setErrors({});
     } catch (error) {
-      console.error('Submission error:', error);
+      console.error("Submission error:", error);
       toast({
         title: "Submission Failed",
-        description: "There was an error sending your message. Please try again later.",
-        variant: "destructive"
+        description:
+          "There was an error sending your message. Please try again later.",
+        variant: "destructive",
       });
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
     const { name, value } = e.target;
-    const sanitizedValue = name !== 'honeypot' ? sanitizeInput(value) : value;
+    const sanitizedValue = name !== "honeypot" ? sanitizeInput(value) : value;
 
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: sanitizedValue
+      [name]: sanitizedValue,
     }));
 
     // Clear error when user starts typing
     if (errors[name]) {
-      setErrors(prev => ({ ...prev, [name]: '' }));
+      setErrors((prev) => ({ ...prev, [name]: "" }));
     }
   };
 
@@ -124,70 +138,83 @@ const ContactSection = () => {
       icon: Mail,
       label: "Email",
       value: "uday.singh240818@gmail.com",
-      link: "mailto:uday.singh240818@gmail.com"
+      link: "mailto:uday.singh240818@gmail.com",
     },
     {
       icon: Phone,
       label: "Phone",
       value: "+91-81268-52998",
-      link: "tel:+918126852998"
+      link: "tel:+918126852998",
     },
     {
       icon: Linkedin,
       label: "LinkedIn",
       value: "udaysingh2626",
-      link: "https://linkedin.com/in/udaysingh2626"
+      link: "https://linkedin.com/in/udaysingh2626",
     },
     {
       icon: Github,
       label: "GitHub",
       value: "singhuday26",
-      link: "https://github.com/singhuday26"
+      link: "https://github.com/singhuday26",
     },
     {
       icon: Code2,
       label: "LeetCode",
       value: "udaysingh2408",
-      link: "https://leetcode.com/udaysingh2408"
+      link: "https://leetcode.com/udaysingh2408",
     },
     {
       icon: Download,
       label: "Resume",
       value: "Download PDF",
       link: "/resume-uday-singh.pdf",
-      download: "Uday_Singh_Resume.pdf"
-    }
+      download: "Uday_Singh_Resume.pdf",
+    },
   ];
 
   return (
     <section id="contact" className="py-20 bg-gradient-subtle">
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
-          <h2 className="section-header text-center mb-16">
-            Let's Connect
-          </h2>
+          <h2 className="section-header text-center mb-16">Let's Connect</h2>
 
           <div className="grid lg:grid-cols-2 gap-12">
             {/* Contact Information */}
             <div className="space-y-8">
               <div>
-                <h3 className="text-2xl font-semibold mb-6 text-primary">Get In Touch</h3>
+                <h3 className="text-2xl font-semibold mb-6 text-primary">
+                  Get In Touch
+                </h3>
                 <p className="text-lg text-muted-foreground mb-8">
-                  I'm always open to discussing new opportunities, collaborations,
-                  or just having a conversation about data science and technology.
-                  Feel free to reach out!
+                  I'm always open to discussing new opportunities,
+                  collaborations, or just having a conversation about data
+                  science and technology. Feel free to reach out!
                 </p>
               </div>
 
               {/* Contact Cards - Center aligned grid */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {contactInfo.map((contact, index) => (
-                  <Card key={index} className="card-professional hover-lift text-center">
+                  <Card
+                    key={index}
+                    className="card-professional hover-lift text-center"
+                  >
                     <a
                       href={contact.link}
-                      target={contact.link.startsWith('http') ? '_blank' : undefined}
-                      rel={contact.link.startsWith('http') ? 'noopener noreferrer' : undefined}
-                      download={'download' in contact ? (contact as any).download : undefined}
+                      target={
+                        contact.link.startsWith("http") ? "_blank" : undefined
+                      }
+                      rel={
+                        contact.link.startsWith("http")
+                          ? "noopener noreferrer"
+                          : undefined
+                      }
+                      download={
+                        "download" in contact
+                          ? (contact as any).download
+                          : undefined
+                      }
                       className="block p-2"
                     >
                       <div className="flex flex-col items-center space-y-3">
@@ -195,8 +222,12 @@ const ContactSection = () => {
                           <contact.icon className="w-6 h-6 text-primary" />
                         </div>
                         <div>
-                          <h4 className="font-medium text-foreground">{contact.label}</h4>
-                          <p className="text-sm text-muted-foreground break-all px-1">{contact.value}</p>
+                          <h4 className="font-medium text-foreground">
+                            {contact.label}
+                          </h4>
+                          <p className="text-sm text-muted-foreground break-all px-1">
+                            {contact.value}
+                          </p>
                         </div>
                       </div>
                     </a>
@@ -207,7 +238,9 @@ const ContactSection = () => {
 
             {/* Contact Form */}
             <Card className="card-professional">
-              <h3 className="text-2xl font-semibold mb-6 text-primary">Send a Message</h3>
+              <h3 className="text-2xl font-semibold mb-6 text-primary">
+                Send a Message
+              </h3>
               <form onSubmit={handleSubmit} className="space-y-6" noValidate>
                 {/* Honeypot field for spam protection - hidden from users */}
                 <input
@@ -215,13 +248,16 @@ const ContactSection = () => {
                   name="honeypot"
                   value={formData.honeypot}
                   onChange={handleChange}
-                  style={{ display: 'none' }}
+                  style={{ display: "none" }}
                   tabIndex={-1}
                   autoComplete="off"
                 />
 
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium mb-2">
+                  <label
+                    htmlFor="name"
+                    className="block text-sm font-medium mb-2"
+                  >
                     Name *
                   </label>
                   <Input
@@ -231,17 +267,22 @@ const ContactSection = () => {
                     onChange={handleChange}
                     required
                     maxLength={50}
-                    className={`w-full ${errors.name ? 'border-destructive' : ''}`}
+                    className={`w-full ${errors.name ? "border-destructive" : ""}`}
                     placeholder="Your full name"
                     autoComplete="name"
                   />
                   {errors.name && (
-                    <p className="text-sm text-destructive mt-1">{errors.name}</p>
+                    <p className="text-sm text-destructive mt-1">
+                      {errors.name}
+                    </p>
                   )}
                 </div>
 
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium mb-2">
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-medium mb-2"
+                  >
                     Email *
                   </label>
                   <Input
@@ -252,17 +293,22 @@ const ContactSection = () => {
                     onChange={handleChange}
                     required
                     maxLength={254}
-                    className={`w-full ${errors.email ? 'border-destructive' : ''}`}
+                    className={`w-full ${errors.email ? "border-destructive" : ""}`}
                     placeholder="your.email@example.com"
                     autoComplete="email"
                   />
                   {errors.email && (
-                    <p className="text-sm text-destructive mt-1">{errors.email}</p>
+                    <p className="text-sm text-destructive mt-1">
+                      {errors.email}
+                    </p>
                   )}
                 </div>
 
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium mb-2">
+                  <label
+                    htmlFor="message"
+                    className="block text-sm font-medium mb-2"
+                  >
                     Message *
                   </label>
                   <Textarea
@@ -273,11 +319,13 @@ const ContactSection = () => {
                     required
                     rows={5}
                     maxLength={1000}
-                    className={`w-full ${errors.message ? 'border-destructive' : ''}`}
+                    className={`w-full ${errors.message ? "border-destructive" : ""}`}
                     placeholder="Tell me about your project or opportunity..."
                   />
                   {errors.message && (
-                    <p className="text-sm text-destructive mt-1">{errors.message}</p>
+                    <p className="text-sm text-destructive mt-1">
+                      {errors.message}
+                    </p>
                   )}
                   <p className="text-xs text-muted-foreground mt-1">
                     {formData.message.length}/1000 characters
